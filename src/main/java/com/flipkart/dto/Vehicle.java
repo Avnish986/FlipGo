@@ -4,9 +4,17 @@ public class Vehicle {
     private String type;
     private int capacity;
 
+    private boolean isAc;
+
     public Vehicle(String type, int capacity) {
         this.type = type;
         this.capacity = capacity;
+    }
+
+    public Vehicle(String type, int capacity, boolean isAc) {
+        this.type = type;
+        this.capacity = capacity;
+        this.isAc = isAc;
     }
 
     public String getType() {
@@ -23,5 +31,13 @@ public class Vehicle {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public boolean isAc() {
+        return isAc;
+    }
+
+    public void setAc(boolean ac) {
+        isAc = ac;
     }
 }

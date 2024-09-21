@@ -1,9 +1,11 @@
 package com.flipkart.app;
 
+import com.flipkart.context.RideSearchContext;
 import com.flipkart.dto.Ride;
 import com.flipkart.dto.User;
 import com.flipkart.dto.Vehicle;
 import com.flipkart.exception.SeatAvailabilityException;
+import com.flipkart.strategies.RideSearchStrategy;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -99,6 +101,19 @@ public class FlipGo {
             System.out.println("No available rides for " + driverName + " starting from " + startLocation + " to " + endLocation);
         } catch (SeatAvailabilityException ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+
+    public void searchRidesStrategyContext(String startLocation, String endLocation, RideSearchStrategy searchStrategy) {
+        RideSearchContext context = new RideSearchContext(searchStrategy);
+
+        List<Ride> availableRides = context.executeSearch(rides, startLocation, endLocation);
+        if (availableRides.isEmpty()) {
+            System.out.println("No rides found with the applied filters.");
+        } else {
+            availableRides.stream()
+                    .sorted(Comparator.comparingInt(Ride::getCostPerSeat))
+                    .forEach(ride -> System.out.println(ride.getRideDetails()));
         }
     }
 
