@@ -1,0 +1,6 @@
+package com.flipkart.user;
+
+public class User {
+    private String name;
+    private S
+}
